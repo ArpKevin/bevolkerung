@@ -32,10 +32,10 @@ namespace Bevolkerung
                 citizens.Add(new(sr.ReadLine()));
             }
 
-            dataContainer.ItemsSource = citizens.Select(x => x.Id);
+            dataContainer.ItemsSource = citizens;
             hanySor.Content = $"{citizens.Count()} sora van a listának.";
-            var elsoSor = citizens.First(); 
-            elsoSorAdatai.Content = $"{elsoSor.Id} {elsoSor.Nem} {elsoSor.SzuletesiEv} {elsoSor.Suly} {elsoSor.Magassag} {elsoSor.Dohanyzik} {elsoSor.Nemzetiseg} {elsoSor.Nepcsoport} {elsoSor.Tartomany} {elsoSor.NettoJovedelem} {elsoSor.IskolaiVegzettseg} {elsoSor.PolitikaiNezet} {elsoSor.AktivSzavazo} {elsoSor.SorFogyasztasEvente} {elsoSor.KrumpliFogyasztasEvente}";
+            var elsoSor = citizens.First();
+            elsoSorAdatai.Content = elsoSor.ToString();
         }
     }
 }

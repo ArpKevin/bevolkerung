@@ -24,8 +24,8 @@ namespace Bevolkerung
             IskolaiVegzettseg = x[10];
             PolitikaiNezet = x[11];
             AktivSzavazo = x[12] == "igen";
-            SorFogyasztasEvente = int.Parse(x[13]);
-            KrumpliFogyasztasEvente = int.Parse(x[14]);
+            SorFogyasztasEvente = int.TryParse(x[13], out _) ? int.Parse(x[13]) : -1;
+            KrumpliFogyasztasEvente = int.TryParse(x[14], out _) ? int.Parse(x[14]) : -1;
         }
 
         public int Id { get; set; }
@@ -43,6 +43,13 @@ namespace Bevolkerung
         public bool AktivSzavazo { get; set; }
         public int? SorFogyasztasEvente { get; set; }
         public int? KrumpliFogyasztasEvente { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Id} {Nem} {SzuletesiEv} {Suly} {Magassag} {(Dohanyzik ? "dohányzik" : string.Empty)} {Nemzetiseg} " +
+                   $"{Nepcsoport ?? "nincs"} {Tartomany} {NettoJovedelem} {IskolaiVegzettseg ?? "nincs"} " +
+                   $"{PolitikaiNezet} {(AktivSzavazo ? "aktív-szavazó" : string.Empty)} {(SorFogyasztasEvente.HasValue ? SorFogyasztasEvente.ToString() : "nem-fogyaszt-sört")} " +
+                   $"{(KrumpliFogyasztasEvente.HasValue ? KrumpliFogyasztasEvente.ToString() : "nem-fogyaszt-krumplit")}";
+        }
     }
 }
-

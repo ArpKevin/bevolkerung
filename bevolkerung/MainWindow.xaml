@@ -5,10 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bevolkerung"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="Auto" Width="800">
     <Grid>
-        <ListBox x:Name="dataContainer"></ListBox>
-        <Label x:Name="hanySor"></Label>
-        <Label x:Name="elsoSorAdatai"></Label>
+        <StackPanel Orientation="Vertical">
+            <Label x:Name="hanySor"></Label>
+            <Label x:Name="elsoSorAdatai"></Label>
+            <ListBox x:Name="dataContainer" Margin="20px" Height="500px"></ListBox>
+        </StackPanel>
+
     </Grid>
 </Window>
