@@ -21,7 +21,7 @@ namespace Bevolkerung
         {
             InitializeComponent();
 
-            List<Bevolkerung> citizens = new();
+            List<bevolkerung> citizens = new();
 
             using StreamReader sr = new(@"..\..\..\src\bevölkerung.txt");
 
