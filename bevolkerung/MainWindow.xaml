@@ -5,12 +5,35 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bevolkerung"
         mc:Ignorable="d"
-        Title="MainWindow" Height="Auto" Width="800">
+        Title="MainWindow" Height="750" Width="1300">
     <Grid>
+        <StackPanel Orientation="Horizontal">
+            <ComboBox SelectionChanged="ComboBox_SelectionChanged" Text="asd"></ComboBox>
+            <Label x:Name="MegoldasMondatos">feladat egy mondatos megoldása:</Label>
+        </StackPanel>
         <StackPanel Orientation="Vertical">
             <Label x:Name="hanySor"></Label>
             <Label x:Name="elsoSorAdatai"></Label>
-            <ListBox x:Name="dataContainer" Margin="20px" Height="500px"></ListBox>
+            <DataGrid x:Name="dataContainerDatagrid" Margin="20px" Height="310" Width="auto" AutoGenerateColumns="False">
+                <DataGrid.Columns>  
+                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Nem" Binding="{Binding Nem}" />
+                    <DataGridTextColumn Header="Születési év" Binding="{Binding SzuletesiEv}" />
+                    <DataGridTextColumn Header="Súly" Binding="{Binding Suly}" />
+                    <DataGridTextColumn Header="Magasság" Binding="{Binding Magassag}" />
+                    <DataGridCheckBoxColumn Header="Dohányzik" Binding="{Binding Dohanyzik}" />
+                    <DataGridTextColumn Header="Nemzetiség" Binding="{Binding Nemzetiseg}" />
+                    <DataGridTextColumn Header="Népcsoport" Binding="{Binding Nepcsoport}" />
+                    <DataGridTextColumn Header="Tartomány" Binding="{Binding Tartomany}" />
+                    <DataGridTextColumn Header="Nettó éves jövedelem" Binding="{Binding NettoJovedelem}" />
+                    <DataGridTextColumn Header="Iskolai végzettség" Binding="{Binding IskolaiVegzettseg}" />
+                    <DataGridTextColumn Header="Politikai nézet" Binding="{Binding PolitikaiNezet}" />
+                    <DataGridCheckBoxColumn Header="Aktív szavazó" Binding="{Binding AktivSzavazo}" />
+                    <DataGridTextColumn Header="Évi sörfogyasztás" Binding="{Binding SorFogyasztasEvente}" />
+                    <DataGridTextColumn Header="Évi krumplifogyasztás" Binding="{Binding KrumpliFogyasztasEvente}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <ListBox x:Name="dataContainerListbox" Margin="20px" Height="500px"></ListBox>
         </StackPanel>
 
     </Grid>

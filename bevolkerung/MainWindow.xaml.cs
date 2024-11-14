@@ -30,10 +30,15 @@ namespace Bevolkerung
             string? line;
             while ((line = sr.ReadLine()) != null) lakossag.Add(new Allampolgar(line));
 
-            dataContainer.ItemsSource = lakossag;
+            dataContainerListbox.ItemsSource = lakossag.Select(l => l.ToString(true));
             hanySor.Content = $"{lakossag.Count()} sora van a listának.";
             var elsoSor = lakossag.First();
             elsoSorAdatai.Content = elsoSor.ToString();
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

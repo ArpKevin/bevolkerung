@@ -16,7 +16,18 @@ namespace Bevolkerung
             SzuletesiEv = int.Parse(x[2]);
             Suly = int.Parse(x[3]);
             Magassag = int.Parse(x[4]);
-            Dohanyzik = x[5] == "igen";
+            Dohanyzik = new KeyValuePair<bool, string>(x[5] == "igen", x[5] == "igen" ? "igen" : "nem");
+            int sorFogyasztas = int.TryParse(x[13], out int sorVal) ? sorVal : -1;
+            SorFogyasztasEvente = new KeyValuePair<int, string>(
+                sorFogyasztas,
+                sorFogyasztas == -1 ? "NA" : sorFogyasztas.ToString()
+            );
+
+            int krumpliFogyasztas = int.TryParse(x[14], out int krumpliVal) ? krumpliVal : -1;
+            KrumpliFogyasztasEvente = new KeyValuePair<int, string>(
+                krumpliFogyasztas,
+                krumpliFogyasztas == -1 ? "NA" : krumpliFogyasztas.ToString()
+            );
             Nemzetiseg = x[6];
             Nepcsoport = x[7];
             Tartomany = x[8];
@@ -24,8 +35,6 @@ namespace Bevolkerung
             IskolaiVegzettseg = x[10];
             PolitikaiNezet = x[11];
             AktivSzavazo = x[12] == "igen";
-            SorFogyasztasEvente = int.TryParse(x[13], out _) ? int.Parse(x[13]) : -1;
-            KrumpliFogyasztasEvente = int.TryParse(x[14], out _) ? int.Parse(x[14]) : -1;
         }
 
         public int Id { get; set; }
@@ -33,7 +42,7 @@ namespace Bevolkerung
         public int SzuletesiEv { get; set; }
         public int Suly { get; set; }
         public int Magassag { get; set; }
-        public bool Dohanyzik { get; set; }
+        public KeyValuePair<bool, string> Dohanyzik { get; set; }
         public string Nemzetiseg { get; set; }
         public string? Nepcsoport { get; set; }
         public string Tartomany { get; set; }
@@ -41,15 +50,25 @@ namespace Bevolkerung
         public string? IskolaiVegzettseg { get; set; }
         public string PolitikaiNezet { get; set; }
         public bool AktivSzavazo { get; set; }
-        public int? SorFogyasztasEvente { get; set; }
-        public int? KrumpliFogyasztasEvente { get; set; }
+        public KeyValuePair<int, string> SorFogyasztasEvente { get; set; }
+        public KeyValuePair<int, string> KrumpliFogyasztasEvente { get; set; }
+        public int HaviNettoJovedelem => (int)(NettoJovedelem / 12.0);
+        public int Eletkor => DateTime.Now.Year - SzuletesiEv;
+
 
         public override string ToString()
         {
-            return $"{Id} {Nem} {SzuletesiEv} {Suly} {Magassag} {(Dohanyzik ? "dohányzik" : string.Empty)} {Nemzetiseg} " +
-                   $"{Nepcsoport ?? "nincs"} {Tartomany} {NettoJovedelem} {IskolaiVegzettseg ?? "nincs"} " +
-                   $"{PolitikaiNezet} {(AktivSzavazo ? "aktív-szavazó" : string.Empty)} {(SorFogyasztasEvente.HasValue ? SorFogyasztasEvente.ToString() : "nem-fogyaszt-sört")} " +
-                   $"{(KrumpliFogyasztasEvente.HasValue ? KrumpliFogyasztasEvente.ToString() : "nem-fogyaszt-krumplit")}";
+            return $"{Id} {Nem} {SzuletesiEv} {Suly} {Magassag} " +
+                   $"{(Dohanyzik.Key ? Dohanyzik.Value : string.Empty)} {Nemzetiseg} " +
+                   $"{(Nepcsoport ?? "nincs")} {Tartomany} {NettoJovedelem} " +
+                   $"{(IskolaiVegzettseg ?? "nincs")} {PolitikaiNezet} " +
+                   $"{(AktivSzavazo ? "aktív-szavazó" : string.Empty)} " +
+                   $"{(SorFogyasztasEvente.Value == "NA" ? "nem-fogyaszt-sört" : SorFogyasztasEvente.Value)} " +
+                   $"{(KrumpliFogyasztasEvente.Value == "NA" ? "nem-fogyaszt-krumplit" : KrumpliFogyasztasEvente.Value)}";
         }
+
+        public string ToString(bool x){ if (x) return $"{Id}\t{Nem}\t{SzuletesiEv}\t{Suly}\t{Magassag}"; else return $"{Id}\t{Nemzetiseg}\t{Nepcsoport ?? "nincs"}\t{Tartomany}\t{NettoJovedelem}";}
+
+
     }
 }
