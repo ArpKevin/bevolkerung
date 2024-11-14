@@ -21,20 +21,18 @@ namespace Bevolkerung
         {
             InitializeComponent();
 
-            List<bevolkerung> citizens = new();
+            List<Allampolgar> lakossag = new();
 
             using StreamReader sr = new(@"..\..\..\src\bevölkerung.txt");
 
             _ = sr.ReadLine();
 
-            while (!sr.EndOfStream)
-            {
-                citizens.Add(new(sr.ReadLine()));
-            }
+            string? line;
+            while ((line = sr.ReadLine()) != null) lakossag.Add(new Allampolgar(line));
 
-            dataContainer.ItemsSource = citizens;
-            hanySor.Content = $"{citizens.Count()} sora van a listának.";
-            var elsoSor = citizens.First();
+            dataContainer.ItemsSource = lakossag;
+            hanySor.Content = $"{lakossag.Count()} sora van a listának.";
+            var elsoSor = lakossag.First();
             elsoSorAdatai.Content = elsoSor.ToString();
         }
     }

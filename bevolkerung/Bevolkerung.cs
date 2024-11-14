@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Bevolkerung
 {
-    internal class bevolkerung
+    internal class Allampolgar
     {
-        public bevolkerung(string sor)
+        public Allampolgar(string sor)
         {
             var x = sor.Split(";");
             Id = int.Parse(x[0]);
